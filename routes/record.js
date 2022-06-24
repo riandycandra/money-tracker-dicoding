@@ -11,10 +11,10 @@ const multer = Multer({
 
 // TODO: Sesuaikan konfigurasi database
 const connection = mysql.createConnection({
-    host: 'public_ip_sql_instance_Anda',
+    host: '34.101.83.106',
     user: 'root',
-    database: 'nama_database_Anda',
-    password: 'password_sql_Anda'
+    database: 'dicoding',
+    password: 'brian@123'
 })
 
 router.get("/dashboard", (req, res) => {
@@ -103,6 +103,7 @@ router.post("/insertrecord", multer.single('attachment'), imgUpload.uploadToGcs,
 
     connection.query(query, [name, amount, date, notes, imageUrl], (err, rows, fields) => {
         if (err) {
+            console.log(err)
             res.status(500).send({message: err.sqlMessage})
         } else {
             res.send({message: "Insert Successful"})
